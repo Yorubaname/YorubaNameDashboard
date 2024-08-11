@@ -4,47 +4,34 @@ import { Edit, useForm, useSelect } from "@refinedev/antd";
 
 import { Form, Input, Select } from "antd";
 
-import MDEditor from "@uiw/react-md-editor";
-
-import type { IPost, ICategory } from "../../interfaces";
+import type { IUser } from "../../interfaces";
 
 export const UserEdit = () => {
-  const { formProps, saveButtonProps, queryResult } = useForm<IPost>();
-
-  const postData = queryResult?.data?.data;
-  const { selectProps: categorySelectProps } = useSelect<ICategory>({
-    resource: "categories",
-    defaultValue: postData?.category.id,
+  const { formProps, saveButtonProps, queryResult } = useForm<IUser>({
+    resource: "users",
   });
+  const postData = queryResult?.data?.data;
 
+  console.log(postData);
   return (
     <Edit saveButtonProps={saveButtonProps}>
       <Form {...formProps} layout="vertical">
         <Form.Item
-          label="Title"
-          name="title"
+          label="Change Username"
+          name="email"
           rules={[
             {
               required: true,
             },
           ]}
+          valuePropName="test"
         >
           <Input />
         </Form.Item>
+
         <Form.Item
-          label="Category"
-          name={["category", "id"]}
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Select {...categorySelectProps} />
-        </Form.Item>
-        <Form.Item
-          label="Status"
-          name="status"
+          label="Priviledges"
+          name="role"
           rules={[
             {
               required: true,
@@ -54,16 +41,16 @@ export const UserEdit = () => {
           <Select
             options={[
               {
-                label: "Published",
-                value: "published",
+                label: "Admin",
+                value: "ADMIN",
               },
               {
-                label: "Draft",
-                value: "draft",
+                label: "Basic Lexicographer",
+                value: "BASIC_LEXICOGRAPHER",
               },
               {
-                label: "Rejected",
-                value: "rejected",
+                label: "Pro Lexicographer",
+                value: "PRO_LEXICOGRAPHER",
               },
             ]}
           />
@@ -77,7 +64,7 @@ export const UserEdit = () => {
             },
           ]}
         >
-          <MDEditor data-color-mode="light" />
+          <Input />
         </Form.Item>
       </Form>
     </Edit>

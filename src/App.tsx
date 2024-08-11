@@ -5,6 +5,7 @@ import {
   ErrorComponent,
   AuthPage,
   RefineThemes,
+  Create,
 } from "@refinedev/antd";
 import {
   GoogleOutlined,
@@ -25,13 +26,13 @@ import { App as AntdApp, ConfigProvider } from "antd";
 
 import "@refinedev/antd/dist/reset.css";
 
-import { UserList, UserEdit, UserShow } from "./pages/users";
+import { UserList, UserEdit, UserShow, UserCreate } from "./pages/users";
 import { NamesList, NameEdit, NameShow } from "./pages/names";
 import { DashboardPage } from "../src/pages/dashboard";
 import { Buffer } from "buffer";
 import { axiosInstance } from "./rest-data-provider/utils";
+import { NameEntriesCreate } from "./pages/names/create";
 
-// const API_URL = "https://api.fake-rest.refine.dev";
 const API_URL = "http://localhost:51515/api/v1";
 
 /**
@@ -190,6 +191,7 @@ const App: React.FC = () => {
                 list: "/users",
                 show: "/users/show/:id",
                 edit: "/users/edit/:id",
+                create: "/users/new",
                 meta: { label: "Users", icon: <UserSwitchOutlined /> },
               },
 
@@ -198,6 +200,7 @@ const App: React.FC = () => {
                 list: "/names",
                 show: "/names/show/:id",
                 edit: "/names/edit/:id",
+                create: "names/new",
                 meta: {
                   label: "Names",
                 },
@@ -228,12 +231,13 @@ const App: React.FC = () => {
                   <Route index element={<UserList />} />
                   <Route path="edit/:id" element={<UserEdit />} />
                   <Route path="show/:id" element={<UserShow />} />
+                  <Route path="new" element={<UserCreate />} />
                 </Route>
                 <Route path="/names">
                   <Route index element={<NamesList />} />
                   <Route path="edit/:id" element={<NameEdit />} />
                   <Route path="show/:id" element={<NameShow />} />
-                  <Route path="create" element={<NamesList />} />
+                  <Route path="new" element={<NameEntriesCreate />} />
                 </Route>
               </Route>
 

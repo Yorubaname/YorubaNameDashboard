@@ -6,6 +6,7 @@ import {
   AuthPage,
   RefineThemes,
   Create,
+  ThemedTitleV2,
 } from "@refinedev/antd";
 import {
   GoogleOutlined,
@@ -219,7 +220,16 @@ const App: React.FC = () => {
                     key="authenticated-routes"
                     fallback={<CatchAllNavigate to="/login" />}
                   >
-                    <ThemedLayoutV2>
+                    <ThemedLayoutV2
+                      Title={({ collapsed }) => (
+                        <ThemedTitleV2
+                          // collapsed is a boolean value that indicates whether the <Sidebar> is collapsed or not
+                          collapsed={collapsed}
+                          //icon={collapsed ? <MySmallIcon /> : <MyLargeIcon />}
+                          text="YorubaName Dashboard"
+                        />
+                      )}
+                    >
                       <Outlet />
                     </ThemedLayoutV2>
                   </Authenticated>

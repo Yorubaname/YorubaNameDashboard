@@ -124,5 +124,7 @@ export const NameEntriesCreate = () => {
         </Form>
       </Modal>
     </NamesList>
+
+    //TODO : Add gloss, embedded videos, and IPA notation
   );
 };

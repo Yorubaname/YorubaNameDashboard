@@ -13,6 +13,8 @@ import {
   GithubOutlined,
   DashboardOutlined,
   UserSwitchOutlined,
+  BarsOutlined,
+  BulbOutlined,
 } from "@ant-design/icons";
 
 import { dataProvider } from "./rest-data-provider";
@@ -53,6 +55,7 @@ const App: React.FC = () => {
         `${email}:${password}`
       ).toString("base64");
 
+      const authToken = `Basic ${encodedEmailandPassword}`;
       const response = await axiosInstance.post(
         `${API_URL}/auth/login`,
         {
@@ -62,16 +65,15 @@ const App: React.FC = () => {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Basic ${encodedEmailandPassword}`,
+            Authorization: authToken,
           },
         }
       );
-
       if (response.status == 200) {
         localStorage.setItem("email", response.data.email);
         localStorage.setItem("IsAuthenticated", "true");
         localStorage.setItem("username", response.data.username);
-        localStorage.setItem("token", encodedEmailandPassword);
+        localStorage.setItem("token", authToken);
         return {
           success: true,
           redirectTo: "/",
@@ -185,6 +187,7 @@ const App: React.FC = () => {
                 list: "/",
                 meta: {
                   label: "Dashboard",
+                  icon: <BulbOutlined />,
                 },
               },
               {

@@ -33,7 +33,6 @@ export const DashboardPage: React.FC = () => {
   });
 
   const metaData = data?.data ?? [];
-  console.log(`metadata is ${metaData}`);
   if (isLoading) {
     return <div>Loading...</div>;
   }

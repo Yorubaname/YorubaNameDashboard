@@ -13,7 +13,7 @@ export const UserCreate = () => {
       type: "replace",
     });
   };
-  const { formProps, modalProps } = useModalForm({
+  const { formProps, modalProps, onFinish } = useModalForm({
     action: "create",
     defaultVisible: true,
     resource: "auth/create",
@@ -21,6 +21,18 @@ export const UserCreate = () => {
     mutationMode: "pessimistic",
     onMutationSuccess: goToPageList,
   });
+
+  const handleOnFinish = (values: any) => {
+    onFinish({
+      username: `${values.username}`,
+      email: `${values.email}`,
+      password: `${values.password}`,
+      createdBy: `${localStorage.username}`,
+
+      roles: [`${values.roles}`],
+    });
+  };
+
   return (
     <UserList>
       <Modal
@@ -31,22 +43,39 @@ export const UserCreate = () => {
         width={512}
         height={512}
       >
-        <Form {...formProps} layout="vertical">
+        <Form
+          {...formProps}
+          layout="vertical"
+          onFinish={handleOnFinish}
+          autoComplete="off"
+        >
           <Form.Item
             label="Username"
-            name="username"
+            name="username1"
             rules={[{ required: true }]}
           >
-            <Input placeholder="Please enter username" />
+            <Input placeholder="Please enter username" autoComplete="false" />
           </Form.Item>
 
           <Form.Item label="Email" name="email" rules={[{ required: true }]}>
-            <Input placeholder="Please enter email" />
+            <Input placeholder="Please enter email" autoComplete="false" />
+          </Form.Item>
+
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[{ required: true }]}
+          >
+            <Input
+              type="password"
+              autoComplete="off"
+              placeholder="Please enter email"
+            />
           </Form.Item>
 
           <Form.Item
             label="Priviledges"
-            name="role"
+            name="roles"
             rules={[
               {
                 required: true,

@@ -14,7 +14,6 @@ axiosInstance.interceptors.request.use(
       request.headers["Authorization"] = `${token}`;
     }
 
-    console.log(request);
     return request;
   }
 );

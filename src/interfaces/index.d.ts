@@ -20,3 +20,10 @@ export interface IUser {
   username: string;
   role: string[];
 }
+
+export interface IMetaData {
+  totalNames: number;
+  totalNewNames: number;
+  totalModifiedNames: number;
+  totalPublishedNames: number;
+}

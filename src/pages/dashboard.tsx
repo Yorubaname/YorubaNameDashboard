@@ -7,7 +7,6 @@ import {
 } from "@refinedev/core";
 
 import { Row, Col, Card, Avatar, Typography, Space } from "antd";
-import { IMetaData } from "../interfaces";
 
 const { Text } = Typography;
 
@@ -21,7 +20,15 @@ export const DashboardPage: React.FC = () => {
     params: { permissions: ["admin"] },
   });
 
-  const { data, isLoading, isError } = useList<IMetaData, HttpError>({
+  const { data, isLoading, isError } = useList<
+    {
+      totalNames: number;
+      totalNewNames: number;
+      totalModifiedNames: number;
+      totalPublishedNames: number;
+    },
+    HttpError
+  >({
     resource: "names/meta",
   });
 
@@ -56,7 +63,7 @@ export const DashboardPage: React.FC = () => {
           >
             <Space align="center" direction="horizontal">
               {/* <Avatar size="large" src={identity?.avatar} /> */}
-              <Text style={fontStyle}>{metaData[0].totalModifiedNames}</Text>
+              <Text style={fontStyle}>{metaData.totalNames}</Text>
             </Space>
           </Card>
         </Col>
@@ -70,7 +77,7 @@ export const DashboardPage: React.FC = () => {
             }}
             headStyle={{ textAlign: "left", color: "whitesmoke" }}
           >
-            <Text style={fontStyle}>{metaData[0].totalPublishedNames}</Text>
+            <Text style={fontStyle}>{metaData.totalPublishedNames}</Text>
           </Card>
         </Col>
         <Col span={6}>
@@ -83,7 +90,7 @@ export const DashboardPage: React.FC = () => {
             }}
             headStyle={{ textAlign: "left", color: "whitesmoke" }}
           >
-            <Text style={fontStyle}>{metaData[0].totalModifiedNames}</Text>
+            <Text style={fontStyle}>{metaData.totalModifiedNames}</Text>
           </Card>
         </Col>
         <Col span={6}>
@@ -96,7 +103,7 @@ export const DashboardPage: React.FC = () => {
             }}
             headStyle={{ textAlign: "left", color: "whitesmoke" }}
           >
-            <Text style={fontStyle}>{metaData[0].totalNewNames}</Text>
+            <Text style={fontStyle}>{metaData.totalNewNames}</Text>
           </Card>
         </Col>
       </Row>

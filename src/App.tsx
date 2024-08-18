@@ -187,7 +187,7 @@ const App: React.FC = () => {
                 list: "/",
                 meta: {
                   label: "Dashboard",
-                  icon: <BulbOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />,
+                  icon: <BulbOutlined />,
                 },
               },
               {
@@ -196,7 +196,7 @@ const App: React.FC = () => {
                 show: "/users/show/:id",
                 edit: "/users/edit/:id",
                 create: "/users/new",
-                meta: { label: "Users", icon: <UserSwitchOutlined onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} /> },
+                meta: { label: "Users", icon: <UserSwitchOutlined /> },
               },
 
               {

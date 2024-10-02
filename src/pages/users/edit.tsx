@@ -7,31 +7,51 @@ import { Form, Input, Select } from "antd";
 import type { IUser } from "../../interfaces";
 
 export const UserEdit = () => {
-  const { formProps, saveButtonProps, queryResult } = useForm<IUser>({
-    resource: "users",
+  const { formProps, saveButtonProps, queryResult, onFinish } = useForm<IUser>({
+    //resource: "/auth/users/",
   });
-  const postData = queryResult?.data?.data;
+  const record = queryResult?.data?.data;
+  const handleOnFinish = (values: any) => {
+    onFinish({
+      username: `${values.username}`,
+      email: `${values.email}`,
+      password: `${values.password}`,
+      updatedBy: `${localStorage.username}`,
+      roles: [`${values.roles}`],
+    });
+  };
 
-  console.log(postData);
   return (
     <Edit saveButtonProps={saveButtonProps}>
-      <Form {...formProps} layout="vertical">
+      <Form {...formProps} layout="vertical" onFinish={handleOnFinish}>
         <Form.Item
-          label="Change Username"
-          name="email"
+          label="Username"
+          name="username"
           rules={[
             {
               required: true,
             },
           ]}
-          valuePropName="test"
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="Priviledges"
-          name="role"
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+            },
+            { disabled: true },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Roles"
+          name="roles"
           rules={[
             {
               required: true,
@@ -54,17 +74,6 @@ export const UserEdit = () => {
               },
             ]}
           />
-        </Form.Item>
-        <Form.Item
-          label="Content"
-          name="content"
-          rules={[
-            {
-              required: true,
-            },
-          ]}
-        >
-          <Input />
         </Form.Item>
       </Form>
     </Edit>

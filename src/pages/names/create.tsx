@@ -13,14 +13,31 @@ export const NameEntriesCreate = () => {
       type: "replace",
     });
   };
-  const { formProps, modalProps } = useModalForm({
+  const { formProps, modalProps, onFinish } = useModalForm({
     action: "create",
     defaultVisible: true,
-    resource: "auth/create",
+    resource: "names",
     redirect: false,
     mutationMode: "pessimistic",
     onMutationSuccess: goToPageList,
   });
+
+  const handleOnFinish = (values: any) => {
+    onFinish({
+      name: `${values.name}`,
+      pronunciation: `${values.pronunciation}`,
+      meaning: `${values.meaning}`,
+      extendedMeaning: `${values.extendedMeaning}`,
+      state: `NEW`,
+      morphology: `${values.morphology}`,
+      famousPeople: `${values.famousPeople}`,
+      syllables: `${values.syllables}`,
+      variants: `${values.variants}`,
+      media: `${values.media}`,
+      submittedBy: `${localStorage.username}`,
+      roles: [`${values.roles}`],
+    });
+  };
 
   const formStyle = {
     maxWidth: "none",
@@ -37,21 +54,29 @@ export const NameEntriesCreate = () => {
         width={1050}
         height={512}
       >
-        <Form {...formProps} layout="vertical" style={formStyle}>
+        <Form
+          {...formProps}
+          layout="vertical"
+          style={formStyle}
+          onFinish={handleOnFinish}
+        >
           <Row>
             <Col span={12} style={formStyle}>
               <Form.Item label="Name" name="name" rules={[{ required: true }]}>
-                <Input placeholder="Please enter name" />
+                <Input placeholder="Please enter name" defaultValue={"test"} />
               </Form.Item>
             </Col>
 
             <Col span={12} style={formStyle}>
               <Form.Item
                 label="Morphology"
-                name="meaning"
+                name="morphology"
                 rules={[{ required: true }]}
               >
-                <Input placeholder="Enter morphology by using hyphen to separate each part, e.g. olú-ní-iyì" />
+                <Input
+                  placeholder="Enter morphology by using hyphen to separate each part, e.g. olú-ní-iyì"
+                  defaultValue={"test"}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -65,12 +90,18 @@ export const NameEntriesCreate = () => {
                 name="meaning"
                 rules={[{ required: true }]}
               >
-                <TextArea placeholder="If meaning of name is not known, write unknown in the space provided. If name has more than one meaning, kindly separate each with comma." />
+                <TextArea
+                  placeholder="If meaning of name is not known, write unknown in the space provided. If name has more than one meaning, kindly separate each with comma."
+                  defaultValue={"test"}
+                />
               </Form.Item>
             </Col>
             <Col span={12} style={formStyle}>
               <Form.Item label="Variants" name="variant">
-                <TextArea placeholder="Enter other known variations for this name. Use comma to separate the different variations." />
+                <TextArea
+                  placeholder="Enter other known variations for this name. Use comma to separate the different variations."
+                  defaultValue={"test"}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -78,14 +109,17 @@ export const NameEntriesCreate = () => {
           <Row>
             <Col span={12} style={formStyle}>
               <Form.Item label="Syllable breakdown" name="syllable">
-                <TextArea placeholder="Enter syllable breakdown by separating each syllable with an hyphen, e.g o-lú-ní-yì" />
+                <TextArea
+                  placeholder="Enter syllable breakdown by separating each syllable with an hyphen, e.g o-lú-ní-yì"
+                  defaultValue={"test"}
+                />
               </Form.Item>
             </Col>
             <Col span={12} style={formStyle}>
-              <Form.Item label="Famous People" name="famouspeople">
+              <Form.Item label="Famous People" name="famousPeople">
                 <TextArea
-                  placeholder="Enter names of famous people bearing this name. Use comma to separate names.
-"
+                  placeholder="Enter names of famous people bearing this name. Use comma to separate names."
+                  defaultValue={"test"}
                 />
               </Form.Item>
             </Col>
@@ -95,12 +129,18 @@ export const NameEntriesCreate = () => {
           <Row>
             <Col span={12} style={formStyle}>
               <Form.Item label="Geolocation" name="geolocation">
-                <TextArea placeholder="Where is this name most commonly used? Choose General if this name applies to more than one region, or chosse Others/Don't Know if you are not sure of its specific origin." />
+                <TextArea
+                  placeholder="Where is this name most commonly used? Choose General if this name applies to more than one region, or chosse Others/Don't Know if you are not sure of its specific origin."
+                  defaultValue={"test"}
+                />
               </Form.Item>
             </Col>
             <Col span={12} style={formStyle}>
               <Form.Item label="Media Link" name="media">
-                <TextArea placeholder="Enter links to resources that can be found online for this name. Use comma to separate links." />
+                <TextArea
+                  placeholder="Enter links to resources that can be found online for this name. Use comma to separate links."
+                  defaultValue={"test"}
+                />
               </Form.Item>
             </Col>
           </Row>
@@ -112,12 +152,15 @@ export const NameEntriesCreate = () => {
                 label="Extra information about this name"
                 name="extrainfo"
               >
-                <TextArea />
+                <TextArea defaultValue={"test"} />
               </Form.Item>
             </Col>
             <Col span={12} style={formStyle}>
               <Form.Item label="Pronunciation" name="pronunciation">
-                <Input placeholder="If you can't properly tone-mark the name, give us your best alphabetic English approximation of how the name is pronounced. e.g. Oh-loo-nee-yee" />
+                <Input
+                  placeholder="If you can't properly tone-mark the name, give us your best alphabetic English approximation of how the name is pronounced. e.g. Oh-loo-nee-yee"
+                  defaultValue={"test"}
+                />
               </Form.Item>
             </Col>
           </Row>

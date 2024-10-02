@@ -51,7 +51,7 @@ export const UserCreate = () => {
         >
           <Form.Item
             label="Username"
-            name="username1"
+            name="username"
             rules={[{ required: true }]}
           >
             <Input placeholder="Please enter username" autoComplete="false" />

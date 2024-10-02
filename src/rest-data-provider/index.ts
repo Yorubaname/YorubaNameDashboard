@@ -105,7 +105,6 @@ export const dataProvider = (
 
   getOne: async ({ resource, id, meta }) => {
     const url = `${apiUrl}/${resource}/${id}`;
-
     const { headers, method } = meta ?? {};
     const requestMethod = (method as MethodTypes) ?? "get";
 

@@ -36,7 +36,7 @@ import { Buffer } from "buffer";
 import { axiosInstance } from "./rest-data-provider/utils";
 import { NameEntriesCreate } from "./pages/names/create";
 
-const API_URL = "http://localhost:51515/api/v1";
+const API_URL = "https://localhost:32770/api/v1";
 
 /**
  *  mock auth credentials to simulate authentication
@@ -191,14 +191,13 @@ const App: React.FC = () => {
                 },
               },
               {
-                name: "users",
+                name: "auth/users",
                 list: "/users",
                 show: "/users/show/:id",
                 edit: "/users/edit/:id",
                 create: "/users/new",
                 meta: { label: "Users", icon: <UserSwitchOutlined /> },
               },
-
               {
                 name: "names",
                 list: "/names",
